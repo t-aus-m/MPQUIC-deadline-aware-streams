@@ -34,6 +34,7 @@ author:
 
 normative:
    QUIC-TRANSPORT: rfc9000
+   QUIC-TLS: rfc9001
    MP-QUIC: I-D.draft-ietf-quic-multipath
 
 informative:
@@ -126,8 +127,7 @@ Usage Constraints:
 
 # Security Considerations
 
-TODO Security
-
+This extension retains all the security features and considerations of {{QUIC-TRANSPORT}}, {{QUIC-TLS}} and {{MP-QUIC}}.
 
 # IANA Considerations
 
