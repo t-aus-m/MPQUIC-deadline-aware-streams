@@ -39,8 +39,7 @@ informative:
 
 --- abstract
 
-TODO Abstract
-
+This document proposes deadline aware streams to be added to Multipath QUIC in order to be able to deliver deadline sensitive information via QUIC over multiple paths.
 
 --- middle
 
