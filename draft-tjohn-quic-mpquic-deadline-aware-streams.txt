@@ -2,34 +2,38 @@
 
 
 
-WG Working Group                                                 T. John
+QUIC                                                             T. John
 Internet-Draft                                               T. Riechard
 Intended status: Informational    Otto-von-Guericke University Magdeburg
 Expires: 17 August 2025                                 13 February 2025
 
 
                    Deadline Aware Streams in MP-QUIC
-                  draft-todo-yourname-protocol-latest
+         draft-tjohn-quic-mpquic-deadline-aware-streams-latest
 
 Abstract
 
-   TODO Abstract
+   This document proposes deadline aware streams to be added to
+   Multipath QUIC in order to be able to deliver deadline sensitive
+   information via QUIC over multiple paths.
 
 About This Document
 
    This note is to be removed before publishing as an RFC.
 
-   The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-todo-yourname-
-   protocol/.
+   The latest revision of this draft can be found at https://t-aus-
+   m.github.io/MPQUIC-deadline-aware-streams/draft-tjohn-quic-mpquic-
+   deadline-aware-streams.html.  Status information for this document
+   may be found at https://datatracker.ietf.org/doc/draft-tjohn-quic-
+   mpquic-deadline-aware-streams/.
 
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
+   Discussion of this document takes place on the QUIC mailing list
+   (mailto:quic@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/quic/.  Subscribe at
+   https://www.ietf.org/mailman/listinfo/quic/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
+   https://github.com/t-aus-m/MPQUIC-deadline-aware-streams.
 
 Status of This Memo
 
