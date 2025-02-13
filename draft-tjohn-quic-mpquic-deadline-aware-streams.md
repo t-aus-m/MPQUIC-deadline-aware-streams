@@ -33,6 +33,8 @@ author:
     email: "riechard@ovgu.de"
 
 normative:
+   QUIC-TRANSPORT: rfc9000
+   MP-QUIC: I-D.draft-ietf-quic-multipath
 
 informative:
 
@@ -51,6 +53,17 @@ TODO Introduction
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
+
+# Extension of {{MP-QUIC}}
+
+## Handshake Negotiation and Transport Parameter
+
+This extension defines a new transport parameter, used to negotiate the use of deadline-aware streams during the connection handshake, as specified in {{QUIC-TRANSPORT}}. The new transport parameter is defined as follows:
+
+- enable_deadline_aware_streams (value TBD): A zero-length value that, if present, indicates that the endpoint supports deadline-aware streams.
+
+Endpoints negotiate the use of deadline-aware streams by including the enable_deadline_aware_streams transport parameter in the handshake. Both endpoints MUST include this transport parameter to enable the use of deadline-aware streams. If an endpoint receives a DEADLINE_CONTROL frame without having negotiated support, it MUST treat this as a connection error of type PROTOCOL_VIOLATION
+
 
 
 # Security Considerations
