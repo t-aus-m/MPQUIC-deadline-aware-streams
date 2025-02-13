@@ -2,13 +2,13 @@
 
 
 
-WG Working Group                                              Y. N. Here
-Internet-Draft                                    Your Organization Here
-Intended status: Informational                          13 February 2025
-Expires: 17 August 2025
+WG Working Group                                                 T. John
+Internet-Draft                                               T. Riechard
+Intended status: Informational    Otto-von-Guericke University Magdeburg
+Expires: 17 August 2025                                 13 February 2025
 
 
-                           TODO - Your title
+                   Deadline Aware Streams in MP-QUIC
                   draft-todo-yourname-protocol-latest
 
 Abstract
@@ -70,7 +70,7 @@ Table of Contents
    4.  IANA Considerations
    5.  Normative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -107,8 +107,13 @@ Acknowledgments
 
    TODO acknowledge.
 
-Author's Address
+Authors' Addresses
 
-   Your Name Here
-   Your Organization Here
-   Email: your.email@example.com
+   Tony John
+   Otto-von-Guericke University Magdeburg
+   Email: tony.john@ovgu.de
+
+
+   Till-Frederik Riechard
+   Otto-von-Guericke University Magdeburg
+   Email: riechard@ovgu.de
