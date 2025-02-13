@@ -68,14 +68,17 @@ To signal deadlines, endpoints use the DEADLINE_CONTROL frame (see {{deadline-co
 # Handling Missed Deadline
 
 If the transport layer determines that the deadline cannot be met, it MAY choose to:
+
 - Discard the data associated with the deadline-aware stream.
 - Inform the application of the missed deadline.
 - Continue delivering the data if it is still deemed useful.
+
 The specific behavior is implementation-specific and MAY be configurable by the application.
 
 ## Custom Scheduler and Congestion Controller for Deadline-Aware Streams
 
 Implementations that support deadline-aware streams SHOULD provide a custom scheduler and congestion controller that prioritize packets based on their deadlines. This includes:
+
 - Path Selection: Dynamically selecting paths that are most likely to meet the deadlines based on real-time metrics like latency, bandwidth, and packet loss.
 - Packet Prioritization: Prioritizing packets from streams with earlier deadlines.
 - Adaptive Retransmissions: Deciding whether to retransmit lost packets based on their remaining time before the deadline.
@@ -97,6 +100,7 @@ Endpoints negotiate the use of deadline-aware streams by including the enable_de
 ## DEADLINE_CONTROL Frame {#deadline-control-frame}
 
 The DEADLINE_CONTROL frame (type=TBD) is used to signal deadline-awareness for specific streams and to indicate their associated deadlines.
+
 ~~~
   DEADLINE_CONTROL Frame {
     Type (i) = TBD,
@@ -104,13 +108,18 @@ The DEADLINE_CONTROL frame (type=TBD) is used to signal deadline-awareness for s
     Deadline (i),
   }
 ~~~
+
 The DEADLINE_CONTROL frame contains the following fields:
+
 Stream ID:
 : A variable-length integer indicating the Stream ID to which the deadline applies.
+
 Deadline:
 : A variable-length integer representing the relative deadline in milliseconds from the time the frame is sent.
 An endpoint sends a DEADLINE_CONTROL frame to indicate that data on the specified stream should be delivered by the given deadline. Upon receiving this frame, the peer MUST attempt to schedule and deliver the data on the specified stream within the indicated deadline.
+
 Usage Constraints:
+
 - Endpoints MUST NOT send the DEADLINE_CONTROL frame unless both endpoints have negotiated support via the enable_deadline_aware_streams transport parameter.
 - If an endpoint receives a DEADLINE_CONTROL frame without having negotiated support, it MUST treat it as a connection error of type PROTOCOL_VIOLATION.
 - The DEADLINE_CONTROL frame MUST only be sent in 1-RTT packets.
