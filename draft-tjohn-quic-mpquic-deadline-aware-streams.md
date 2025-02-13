@@ -86,7 +86,7 @@ Implementations that support deadline-aware streams SHOULD provide a custom sche
 
 This extension is based on and aims to extend {{MP-QUIC}}. The contents of this extension will be specified in this section.
 
-## Handshake Negotiation and Transport Parameter
+## Handshake Negotiation and Transport Parameter {#nego}
 
 This extension defines a new transport parameter, used to negotiate the use of deadline-aware streams during the connection handshake, as specified in {{QUIC-TRANSPORT}}. The new transport parameter is defined as follows:
 
