@@ -19,8 +19,7 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "Deadline Aware Streams in MP-QUIC"
 category: info
 
 docname: draft-todo-yourname-protocol-latest
@@ -45,9 +44,13 @@ venue:
 
 author:
  -
-    fullname: Your Name Here
-    organization: Your Organization Here
-    email: your.email@example.com
+    fullname: "Tony John"
+    organization: "Otto-von-Guericke University Magdeburg"
+    email: "tony.john@ovgu.de"
+ -
+    fullname: "Till-Frederik Riechard"
+    organization: "Otto-von-Guericke University Magdeburg"
+    email: "riechard@ovgu.de"
 
 normative:
 
