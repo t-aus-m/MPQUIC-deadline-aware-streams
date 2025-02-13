@@ -1,0 +1,3 @@
+# Automatically generated CODEOWNERS
+# Regenerate with `make update-codeowners`
+draft-tjohn-quic-mpquic-deadline-aware-streams.md tony.john@ovgu.de riechard@ovgu.de
