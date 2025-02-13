@@ -70,9 +70,11 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Security Considerations
-   4.  IANA Considerations
-   5.  Normative References
+   3.  Extension of MP-QUIC
+     3.1.  Handshake Negotiation and Transport Parameter
+   4.  Security Considerations
+   5.  IANA Considerations
+   6.  Normative References
    Acknowledgments
    Authors' Addresses
 
@@ -88,15 +90,47 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  Security Considerations
+3.  Extension of [MP-QUIC]
+
+3.1.  Handshake Negotiation and Transport Parameter
+
+   This extension defines a new transport parameter, used to negotiate
+   the use of deadline-aware streams during the connection handshake, as
+   specified in [QUIC-TRANSPORT].  The new transport parameter is
+   defined as follows:
+
+   *  enable_deadline_aware_streams (value TBD): A zero-length value
+      that, if present, indicates that the endpoint supports deadline-
+      aware streams.
+
+   Endpoints negotiate the use of deadline-aware streams by including
+   the enable_deadline_aware_streams transport parameter in the
+   handshake.  Both endpoints MUST include this transport parameter to
+   enable the use of deadline-aware streams.  If an endpoint receives a
+   DEADLINE_CONTROL frame without having negotiated support, it MUST
+   treat this as a connection error of type PROTOCOL_VIOLATION
+
+4.  Security Considerations
 
    TODO Security
 
-4.  IANA Considerations
+5.  IANA Considerations
 
    This document has no IANA actions.
 
-5.  Normative References
+6.  Normative References
+
+   [MP-QUIC]  Liu, Y., Ma, Y., De Coninck, Q., Bonaventure, O., Huitema,
+              C., and M. Kühlewind, "Multipath Extension for QUIC", Work
+              in Progress, Internet-Draft, draft-ietf-quic-multipath-12,
+              22 January 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-quic-multipath-12>.
+
+   [QUIC-TRANSPORT]
+              Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
+              Multiplexed and Secure Transport", RFC 9000,
+              DOI 10.17487/RFC9000, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9000>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
