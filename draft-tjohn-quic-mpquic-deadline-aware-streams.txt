@@ -223,7 +223,8 @@ Table of Contents
 
 7.  Security Considerations
 
-   TODO Security
+   This extension retains all the security features and considerations
+   of [QUIC-TRANSPORT], [QUIC-TLS] and [MP-QUIC].
 
 8.  IANA Considerations
 
@@ -262,6 +263,10 @@ Table of Contents
               in Progress, Internet-Draft, draft-ietf-quic-multipath-12,
               22 January 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-quic-multipath-12>.
+
+   [QUIC-TLS] Thomson, M., Ed. and S. Turner, Ed., "Using TLS to Secure
+              QUIC", RFC 9001, DOI 10.17487/RFC9001, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9001>.
 
    [QUIC-TRANSPORT]
               Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
