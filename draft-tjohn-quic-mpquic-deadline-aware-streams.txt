@@ -81,7 +81,9 @@ Table of Contents
      7.2.  DEADLINE_CONTROL Frame
    8.  Security Considerations
    9.  IANA Considerations
-   10. Normative References
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -119,7 +121,7 @@ Table of Contents
    pool of available paths beyond traditional IPv4 and IPv6 routes,
    potentially increasing the effectiveness of deadline-aware mechanisms
    like those proposed in the Deadline-aware Multipath Transport
-   Protocol (DMTP).
+   Protocol [DMTP].
 
 4.  Signaling Deadlines
 
@@ -278,7 +280,9 @@ Table of Contents
                   Table 2: Addition to QUIC Frame Types
                                  Entries
 
-10.  Normative References
+10.  References
+
+10.1.  Normative References
 
    [MP-QUIC]  Liu, Y., Ma, Y., De Coninck, Q., Bonaventure, O., Huitema,
               C., and M. Kühlewind, "Multipath Extension for QUIC", Work
@@ -304,6 +308,15 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+10.2.  Informative References
+
+   [DMTP]     John, T., Perrig, A., and D. Hausheer, "DMTP: Deadline-
+              aware Multipath Transport Protocol", IEEE, 2023 IFIP
+              Networking Conference (IFIP Networking),
+              DOI 10.23919/ifipnetworking57963.2023.10186417, June 2023,
+              <https://doi.org/10.23919/
+              ifipnetworking57963.2023.10186417>.
 
 Acknowledgments
 
