@@ -1,9 +1,9 @@
 ---
 title: "Deadline Aware Streams in MP-QUIC"
-category: info //: # TODO: Figure out correct category
+category: info # TODO: Figure out correct category
 
 docname: draft-tjohn-quic-mpquic-deadline-aware-streams-latest
-submissiontype: IETF  //: # also: "independent", "editorial", "IAB", or "IRTF"
+submissiontype: IETF # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
 consensus: true
@@ -22,7 +22,7 @@ venue:
   github: "t-aus-m/MPQUIC-deadline-aware-streams"
   latest: "https://t-aus-m.github.io/MPQUIC-deadline-aware-streams/draft-tjohn-quic-mpquic-deadline-aware-streams.html"
 
-author: //: # TODO: Any more authors that need to be added?
+author: # TODO: Any more authors that need to be added?
  -
     fullname: "Tony John"
     organization: "Otto-von-Guericke University Magdeburg"
