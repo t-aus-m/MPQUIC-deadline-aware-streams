@@ -1,16 +1,16 @@
 ---
 title: "Deadline Aware Streams in MP-QUIC"
-category: info
+category: info //: # TODO: Figure out correct category
 
 docname: draft-tjohn-quic-mpquic-deadline-aware-streams-latest
-submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
+submissiontype: IETF  //: # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
 consensus: true
 v: 3
 area: ""
 workgroup: "QUIC"
-keyword:
+keyword: # TODO: Define fitting keywords
  - next generation
  - unicorn
  - sparkling distributed ledger
@@ -22,7 +22,7 @@ venue:
   github: "t-aus-m/MPQUIC-deadline-aware-streams"
   latest: "https://t-aus-m.github.io/MPQUIC-deadline-aware-streams/draft-tjohn-quic-mpquic-deadline-aware-streams.html"
 
-author:
+author: //: # TODO: Any more authors that need to be added?
  -
     fullname: "Tony John"
     organization: "Otto-von-Guericke University Magdeburg"
@@ -43,7 +43,7 @@ informative:
 
 --- abstract
 
-This document proposes deadline aware streams to be added to Multipath QUIC in order to be able to deliver deadline sensitive information via QUIC over multiple paths.
+This document proposes deadline aware streams to be added to the Multipath Extension to QUIC in order to be able to deliver deadline sensitive information via QUIC over multiple paths.
 
 --- middle
 
