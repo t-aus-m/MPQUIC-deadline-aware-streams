@@ -61,6 +61,9 @@ The Multipath Extension of QUIC {{MP-QUIC}} enhances performance by utilizing mu
 
 Additionally, the ability to have multiple paths using the same 4-tuple opens up the possibility of leveraging paths from path-aware networks like SCION, source routing, and others. This expands the pool of available paths beyond traditional IPv4 and IPv6 routes, potentially increasing the effectiveness of deadline-aware mechanisms like those proposed in the Deadline-aware Multipath Transport Protocol {{DMTP}}.
 
+While the implementation of deadline-aware streams with implementation-specific APIs is of course possible, that approach would likely lack endpoint coordination, because deadlines would not be communicated between different through the protocol. By introducing a transport parameter (see {{transport-parameter}}) and a custom frame (see {{deadline-control frame}}), endpoints can negotiate support and exchange deadline information directly within the protocol, enabling coordinated scheduling decisions at the transport layer. Standardizing this mechanism avoids the limitations of implementation-specific solutions, promoting wider adoption and 
+interoperability of deadline-aware streams across different implementations of {{MP-QUIC}}.
+
 # Signaling Deadlines
 
 To signal deadlines, endpoints use the DEADLINE_CONTROL frame (see {{deadline-control-frame}}). This frame associates a specific deadline with a stream, indicating the relative time by which the data should be delivered.
@@ -96,7 +99,7 @@ Implementations that support deadline-aware streams SHOULD provide a custom sche
 
 This extension is based on and aims to extend {{MP-QUIC}}. The contents of this extension will be specified in this section.
 
-## Handshake Negotiation and Transport Parameter {#nego}
+## Handshake Negotiation and Transport Parameter {#transport-parameter}
 
 This extension defines a new transport parameter, used to negotiate the use of deadline-aware streams during the connection handshake, as specified in {{QUIC-TRANSPORT}}. The new transport parameter is defined as follows:
 
@@ -143,7 +146,7 @@ The following entry in {{transport-parameters}} should be added to the "QUIC Tra
 
 Value                                         | Parameter Name.   | Specification
 ----------------------------------------------|-------------------|-----------------
-TBD                                           | enable_deadline_aware_streams  | {{nego}}
+TBD                                           | enable_deadline_aware_streams  | {{transport-parameter}}
 {: #transport-parameters title="Addition to QUIC Transport Parameters Entries"}
 
 The following frame type defined in {{frame-types}} should be added to
