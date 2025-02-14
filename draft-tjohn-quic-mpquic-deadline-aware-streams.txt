@@ -123,6 +123,19 @@ Table of Contents
    like those proposed in the Deadline-aware Multipath Transport
    Protocol [DMTP].
 
+   While the implementation of deadline-aware streams with
+   implementation-specific APIs is of course possible, that approach
+   would likely lack endpoint coordination, because deadlines would not
+   be communicated between different through the protocol.  By
+   introducing a transport parameter (see Section 7.1) and a custom
+   frame (see Section 7.2), endpoints can negotiate support and exchange
+   deadline information directly within the protocol, enabling
+   coordinated scheduling decisions at the transport layer.
+   Standardizing this mechanism avoids the limitations of
+   implementation-specific solutions, promoting wider adoption and
+   interoperability of deadline-aware streams across different
+   implementations of [MP-QUIC].
+
 4.  Signaling Deadlines
 
    To signal deadlines, endpoints use the DEADLINE_CONTROL frame (see

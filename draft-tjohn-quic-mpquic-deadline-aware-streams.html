@@ -1239,6 +1239,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       </h2>
 <p id="section-3-1">The Multipath Extension of QUIC <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span> enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming, there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing deadline-aware streams to <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span> could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Additionally, the ability to have multiple paths using the same 4-tuple opens up the possibility of leveraging paths from path-aware networks like SCION, source routing, and others. This expands the pool of available paths beyond traditional IPv4 and IPv6 routes, potentially increasing the effectiveness of deadline-aware mechanisms like those proposed in the Deadline-aware Multipath Transport Protocol <span>[<a href="#DMTP" class="cite xref">DMTP</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">While the implementation of deadline-aware streams with implementation-specific APIs is of course possible, that approach would likely lack endpoint coordination, because deadlines would not be communicated between different through the protocol. By introducing a transport parameter (see <a href="#transport-parameter" class="auto internal xref">Section 7.1</a>) and a custom frame (see <a href="#deadline-control-frame" class="auto internal xref">Section 7.2</a>), endpoints can negotiate support and exchange deadline information directly within the protocol, enabling coordinated scheduling decisions at the transport layer. Standardizing this mechanism avoids the limitations of implementation-specific solutions, promoting wider adoption and interoperability of deadline-aware streams across different implementations of <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span>.<a href="#section-3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="signaling-deadlines">
@@ -1321,7 +1322,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-extension-of-multipath-exte" class="section-name selfRef">Extension of Multipath Extension of QUIC</a>
       </h2>
 <p id="section-7-1">This extension is based on and aims to extend <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span>. The contents of this extension will be specified in this section.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<div id="nego">
+<div id="transport-parameter">
 <section id="section-7.1">
         <h3 id="name-handshake-negotiation-and-t">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-handshake-negotiation-and-t" class="section-name selfRef">Handshake Negotiation and Transport Parameter</a>
@@ -1413,7 +1414,7 @@ An endpoint sends a DEADLINE_CONTROL frame to indicate that data on the specifie
             <td class="text-left" rowspan="1" colspan="1">TBD</td>
             <td class="text-left" rowspan="1" colspan="1">enable_deadline_aware_streams</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <a href="#nego" class="auto internal xref">Section 7.1</a>
+              <a href="#transport-parameter" class="auto internal xref">Section 7.1</a>
 </td>
           </tr>
         </tbody>
