@@ -56,7 +56,7 @@ Deadline-aware streams allow applications to specify deadlines for data transmis
 
 # Motivation
 
-Multipath QUIC enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming, there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing deadline-aware streams to Multipath QUIC could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.
+The Multipath Extension of QUIC {{MP-QUIC}} enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming, there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing deadline-aware streams to {{MP-QUIC}} could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.
 
 Additionally, the ability to have multiple paths using the same 4-tuple opens up the possibility of leveraging paths from path-aware networks like SCION, source routing, and others. This expands the pool of available paths beyond traditional IPv4 and IPv6 routes, potentially increasing the effectiveness of deadline-aware mechanisms like those proposed in the Deadline-aware Multipath Transport Protocol (DMTP).
 
