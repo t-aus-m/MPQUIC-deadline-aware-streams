@@ -42,8 +42,9 @@ informative:
    DMTP: DOI.10.23919/IFIPNetworking57963.2023.10186417
 
 
---- abstract //: # TODO: Rephrase to reflect DMTP as a whole
+--- abstract
 
+//: # TODO: Rephrase to reflect DMTP as a whole
 This document proposes deadline aware streams to be added to the Multipath Extension to QUIC in order to be able to deliver deadline sensitive information via QUIC over multiple paths.
 
 --- middle
