@@ -36,18 +36,19 @@ normative:
    QUIC-TRANSPORT: rfc9000
    QUIC-TLS: rfc9001
    MP-QUIC: I-D.draft-ietf-quic-multipath
+   QUIC-AFEC: I-D.draft-dmoskvitin-quic-adaptive-fec
 
 informative:
    DMTP: DOI.10.23919/IFIPNetworking57963.2023.10186417
 
 
---- abstract
+--- abstract //: # TODO: Rephrase to reflect DMTP as a whole
 
 This document proposes deadline aware streams to be added to the Multipath Extension to QUIC in order to be able to deliver deadline sensitive information via QUIC over multiple paths.
 
 --- middle
 
-# Introduction
+# Introduction //: # TODO: Rephrase to reflect DMTP as a whole
 
 Deadline-aware streams allow applications to specify deadlines for data transmission on specific streams. This enables the transport layer to make scheduling and retransmission decisions that aim to meet these deadlines, optimizing for latency-sensitive applications.
 
@@ -55,7 +56,7 @@ Deadline-aware streams allow applications to specify deadlines for data transmis
 
 {::boilerplate bcp14-tagged}
 
-# Motivation
+# Motivation //: # TODO: Rephrase to reflect DMTP as a whole
 
 The Multipath Extension of QUIC {{MP-QUIC}} enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming, there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing deadline-aware streams to {{MP-QUIC}} could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.
 
@@ -63,26 +64,7 @@ Additionally, the ability to have multiple paths using the same 4-tuple opens up
 
 While the implementation of deadline-aware streams with implementation-specific APIs is of course possible, that approach would likely lack endpoint coordination, because deadlines would not be communicated between different through the protocol. By introducing a transport parameter (see {{transport-parameter}}) and a custom frame (see {{deadline-control-frame}}), endpoints can negotiate support and exchange deadline information directly within the protocol, enabling coordinated scheduling decisions at the transport layer. Standardizing this mechanism avoids the limitations of implementation-specific solutions, promoting wider adoption and interoperability of deadline-aware streams across different implementations of {{MP-QUIC}}.
 
-# Signaling Deadlines
-
-To signal deadlines, endpoints use the DEADLINE_CONTROL frame (see {{deadline-control-frame}}). This frame associates a specific deadline with a stream, indicating the relative time by which the data should be delivered.
-
-# Deadline Semantics
-
-- Deadline Representation: Deadlines are represented as a relative time in milliseconds from the time the frame is sent.
-- Stream Association: A deadline applies to a specific stream identified by its Stream ID
-- Transport Behavior: Upon receiving a DEADLINE_CONTROL frame, the transport layer SHOULD attempt to schedule and retransmit packets carrying data for the specified stream to meet the indicated deadline.
-- Retransmissions and Scheduling: Endpoints MAY implement custom schedulers and congestion controllers optimized for deadline-aware traffic, such as those based on DMTP concepts.
-
-# Handling Missed Deadline
-
-If the transport layer determines that the deadline cannot be met, it MAY choose to:
-
-- Discard the data associated with the deadline-aware stream.
-- Inform the application of the missed deadline.
-- Continue delivering the data if it is still deemed useful.
-
-The specific behavior is implementation-specific and MAY be configurable by the application.
+# Design of DMTP
 
 ## Custom Scheduler and Congestion Controller for Deadline-Aware Streams
 
@@ -93,6 +75,36 @@ Implementations that support deadline-aware streams SHOULD provide a custom sche
 - Adaptive Retransmissions: Deciding whether to retransmit lost packets based on their remaining time before the deadline.
 - Forward Error Correction (FEC): Optionally integrating FEC mechanisms to reduce the need for retransmissions in networks with random losses.
 - Deadline Miss Handling: Informing the application when a deadline cannot be met, allowing it to take appropriate action.
+
+## Deadlines
+
+### Signaling Deadlines
+
+To signal deadlines, endpoints use the DEADLINE_CONTROL frame (see {{deadline-control-frame}}). This frame associates a specific deadline with a stream, indicating the relative time by which the data should be delivered.
+
+### Deadline Semantics
+
+- Deadline Representation: Deadlines are represented as a relative time in milliseconds from the time the frame is sent.
+- Stream Association: A deadline applies to a specific stream identified by its Stream ID
+- Transport Behavior: Upon receiving a DEADLINE_CONTROL frame, the transport layer SHOULD attempt to schedule and retransmit packets carrying data for the specified stream to meet the indicated deadline.
+- Retransmissions and Scheduling: Endpoints MAY implement custom schedulers and congestion controllers optimized for deadline-aware traffic, such as those based on DMTP concepts.
+
+### Handling Missed Deadline
+
+If the transport layer determines that the deadline cannot be met, it MAY choose to:
+
+- Discard the data associated with the deadline-aware stream.
+- Inform the application of the missed deadline.
+- Continue delivering the data if it is still deemed useful.
+
+The specific behavior is implementation-specific and MAY be configurable by the application.
+
+## Adaptive Forward Error Correction (FEC)
+
+DMTP optionally uses Adaptive FEC as proposed in {{QUIC-AFEC}} to reduce the need for retransmissions in networks with random losses.
+When using {{QUIC-AFEC}}, the Tag Type of the FEC_Tag MUST be set to 1 in order for the FEC to work in a {{MP-QUIC}} and DMTP environment. FEC Packets SHOULD be sent via another path then the source data, it is however RECOMMENDED to send the FEC data via the retransmission path.
+
+## Smart Retransmissions
 
 # Extension of Multipath Extension of QUIC
 
@@ -132,6 +144,8 @@ Usage Constraints:
 - Endpoints MUST NOT send the DEADLINE_CONTROL frame unless both endpoints have negotiated support via the enable_deadline_aware_streams transport parameter.
 - If an endpoint receives a DEADLINE_CONTROL frame without having negotiated support, it MUST treat it as a connection error of type PROTOCOL_VIOLATION.
 - The DEADLINE_CONTROL frame MUST only be sent in 1-RTT packets.
+
+# API
 
 # Security Considerations
 
