@@ -315,7 +315,7 @@ Table of Contents
      }
 
    The DMTP_ACK adds the Timestamp field to the [QUIC] ACK frame.  It
-   MUST be formatted according to [rfc3339] with a resolution down to
+   MUST be formatted according to [RFC3339] with a resolution down to
    the nanosecond, i.e. with 9 digits after the decimal point.  If an
    endpoint uses a clock with a lower resolution, the remaining digits
    SHOULD be padded with zeros.
@@ -394,7 +394,7 @@ Table of Contents
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
-   [rfc3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
+   [RFC3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
               Timestamps", RFC 3339, DOI 10.17487/RFC3339, July 2002,
               <https://www.rfc-editor.org/rfc/rfc3339>.
 
