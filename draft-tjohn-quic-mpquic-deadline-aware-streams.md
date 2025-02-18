@@ -106,6 +106,8 @@ When using {{QUIC-AFEC}}, the Tag Type of the FEC_Tag MUST be set to 1 in order 
 
 ## Smart Retransmissions
 
+## Path Metrics
+
 # Extension of Multipath Extension of QUIC
 
 This extension is based on and aims to extend {{MP-QUIC}}. The contents of this extension will be specified in this section.
