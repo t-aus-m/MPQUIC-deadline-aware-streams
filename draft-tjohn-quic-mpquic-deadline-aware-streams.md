@@ -37,7 +37,7 @@ normative:
    QUIC-TLS: rfc9001
    MP-QUIC: I-D.draft-ietf-quic-multipath
    QUIC-AFEC: I-D.draft-dmoskvitin-quic-adaptive-fec
-   rfc3339:
+   RFC3339:
 
 informative:
    DMTP: DOI.10.23919/IFIPNetworking57963.2023.10186417
@@ -172,7 +172,7 @@ When using deadline-awareness the receiver SHOULD acknowledge each packet separa
   }
 ~~~
 
-The DMTP_ACK adds the Timestamp field to the {{QUIC}} ACK frame. It MUST be formatted according to {{rfc3339}} with a resolution down to the nanosecond, i.e. with 9 digits after the decimal point. If an endpoint uses a clock with a lower resolution, the remaining digits SHOULD be padded with zeros.
+The DMTP_ACK adds the Timestamp field to the {{QUIC}} ACK frame. It MUST be formatted according to {{RFC3339}} with a resolution down to the nanosecond, i.e. with 9 digits after the decimal point. If an endpoint uses a clock with a lower resolution, the remaining digits SHOULD be padded with zeros.
 
 # API
 
