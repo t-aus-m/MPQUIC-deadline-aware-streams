@@ -49,21 +49,17 @@ This document proposes the Deadline-aware Multipath Transport Protocol (DMTP) as
 
 --- middle
 
-# Introduction //: # TODO: Rephrase to reflect DMTP as a whole
-
-Deadline-aware streams allow applications to specify deadlines for data transmission on specific streams. This enables the transport layer to make scheduling and retransmission decisions that aim to meet these deadlines, optimizing for latency-sensitive applications.
-
-# Conventions and Definitions
-
-{::boilerplate bcp14-tagged}
-
-# Motivation
+# Introduction
 
 The Multipath Extension of QUIC {{MP-QUIC}} enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing DMTP to {{MP-QUIC}} could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.
 
 While the implementation of DMTP with implementation-specific APIs would be possible, that approach would likely lack endpoint coordination, because deadlines would not be communicated between different implementations and/or endpoints through the protocol. By introducing a transport parameter (see {{transport-parameter}}) and a custom frame (see {{deadline-control-frame}}), endpoints can negotiate support and exchange deadline information directly within the protocol, enabling coordinated scheduling decisions at the transport layer. Standardizing this mechanism avoids the limitations of implementation-specific solutions, promoting wider adoption and interoperability of DMTP across different implementations of {{MP-QUIC}}.
 
 This draft is based on a conference paper proposing {{DMTP}}.
+
+# Conventions and Definitions
+
+{::boilerplate bcp14-tagged}
 
 # Design of DMTP
 
