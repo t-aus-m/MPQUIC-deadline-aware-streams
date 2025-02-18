@@ -229,7 +229,7 @@ Table of Contents
    A crucial metric for DMTP to work is the one way delay of each path,
    as this determines the suitability of that path for reaching the
    deadline requirement.  DMTP is designed to be able to retrieve this
-   metric from a path-aware network like SCION directly.  However, if
+   metric from a path-aware network like [SCION] directly.  However, if
    such an underlying network is not present, DMTP is also able to
    measure the per path delay itself.  For this to work effectively,
    endpoints SHOULD use clock synchronization while communication via
@@ -424,6 +424,14 @@ Table of Contents
               DOI 10.23919/ifipnetworking57963.2023.10186417, June 2023,
               <https://doi.org/10.23919/
               ifipnetworking57963.2023.10186417>.
+
+   [SCION]    Chuat, L., Legner, M., Basin, D., Hausheer, D., Hitz, S.,
+              Müller, P., and A. Perrig, "The Complete Guide to SCION:
+              From Design Principles to Formal Verification", Springer
+              International Publishing, Information Security
+              and Cryptography, DOI 10.1007/978-3-031-05288-0,
+              ISBN ["9783031052873", "9783031052880"], 2022,
+              <https://doi.org/10.1007/978-3-031-05288-0>.
 
 Acknowledgments
 

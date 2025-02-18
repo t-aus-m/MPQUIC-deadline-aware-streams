@@ -1377,7 +1377,7 @@ FEC Packets <span class="bcp14">SHOULD</span> be sent via another path then the 
           <h4 id="name-per-path-delay">
 <a href="#section-3.5.1" class="section-number selfRef">3.5.1. </a><a href="#name-per-path-delay" class="section-name selfRef">Per Path Delay</a>
           </h4>
-<p id="section-3.5.1-1">A crucial metric for DMTP to work is the one way delay of each path, as this determines the suitability of that path for reaching the deadline requirement. DMTP is designed to be able to retrieve this metric from a path-aware network like SCION directly. However, if such an underlying network is not present, DMTP is also able to measure the per path delay itself. For this to work effectively, endpoints <span class="bcp14">SHOULD</span> use clock synchronization while communication via DMTP to ensure accuracy of the delay measurements. This proposal adds a new frame type (see <a href="#dmtp-ack-frame" class="auto internal xref">Section 4.3</a>) to determine the per path delays. Since acknowledgments should be sent back to the sender via a path that is different from the receive path, per path delays have to be probed separately. For this, PING frames are sent regularly via each individual active path.<a href="#section-3.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-1">A crucial metric for DMTP to work is the one way delay of each path, as this determines the suitability of that path for reaching the deadline requirement. DMTP is designed to be able to retrieve this metric from a path-aware network like <span>[<a href="#SCION" class="cite xref">SCION</a>]</span> directly. However, if such an underlying network is not present, DMTP is also able to measure the per path delay itself. For this to work effectively, endpoints <span class="bcp14">SHOULD</span> use clock synchronization while communication via DMTP to ensure accuracy of the delay measurements. This proposal adds a new frame type (see <a href="#dmtp-ack-frame" class="auto internal xref">Section 4.3</a>) to determine the per path delays. Since acknowledgments should be sent back to the sender via a path that is different from the receive path, per path delays have to be probed separately. For this, PING frames are sent regularly via each individual active path.<a href="#section-3.5.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="per-path-loss-rate">
@@ -1613,8 +1613,12 @@ the "QUIC Frame Types" registry under the "QUIC Protocol" heading.<a href="#sect
         </h3>
 <dl class="references">
 <dt id="DMTP">[DMTP]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">John, T.</span>, <span class="refAuthor">Perrig, A.</span>, and <span class="refAuthor">D. Hausheer</span>, <span class="refTitle">"DMTP: Deadline-aware Multipath Transport Protocol"</span>, <span class="refContent">IEEE</span>, <span class="seriesInfo">2023 IFIP Networking Conference (IFIP Networking)</span>, <span class="seriesInfo">DOI 10.23919/ifipnetworking57963.2023.10186417</span>, <time datetime="2023-06" class="refDate">June 2023</time>, <span>&lt;<a href="https://doi.org/10.23919/ifipnetworking57963.2023.10186417">https://doi.org/10.23919/ifipnetworking57963.2023.10186417</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="SCION">[SCION]</dt>
+      <dd>
+<span class="refAuthor">Chuat, L.</span>, <span class="refAuthor">Legner, M.</span>, <span class="refAuthor">Basin, D.</span>, <span class="refAuthor">Hausheer, D.</span>, <span class="refAuthor">Hitz, S.</span>, <span class="refAuthor">Müller, P.</span>, and <span class="refAuthor">A. Perrig</span>, <span class="refTitle">"The Complete Guide to SCION: From Design Principles to Formal Verification"</span>, <span class="refContent">Springer International Publishing</span>, <span class="seriesInfo">Information Security and Cryptography</span>, <span class="seriesInfo">DOI 10.1007/978-3-031-05288-0</span>, <span class="seriesInfo">ISBN ["9783031052873", "9783031052880"]</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://doi.org/10.1007/978-3-031-05288-0">https://doi.org/10.1007/978-3-031-05288-0</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
