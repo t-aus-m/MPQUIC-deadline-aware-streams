@@ -5,7 +5,7 @@
 QUIC                                                             T. John
 Internet-Draft                                               T. Riechard
 Intended status: Informational    Otto-von-Guericke University Magdeburg
-Expires: 21 August 2025                                 17 February 2025
+Expires: 22 August 2025                                 18 February 2025
 
 
                    Deadline Aware Streams in MP-QUIC
@@ -13,10 +13,12 @@ Expires: 21 August 2025                                 17 February 2025
 
 Abstract
 
-   //: # TODO: Rephrase to reflect DMTP as a whole This document
-   proposes deadline aware streams to be added to the Multipath
-   Extension to QUIC in order to be able to deliver deadline sensitive
-   information via QUIC over multiple paths.
+   This document proposes the Deadline-aware Multipath Transport
+   Protocol (DMTP) as an extension to the Multipath Extension of QUIC.
+   DMTP leverages multiple paths along adaptive Forward Error Correction
+   (FEC) and smart retransmissions to support real-time applications
+   with strict latency requirements.  With this it fills in a niche with
+   increasing demand, that existing multipath protocols fall short on.
 
 About This Document
 
@@ -51,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 August 2025.
+   This Internet-Draft will expire on 22 August 2025.
 
 Copyright Notice
 
@@ -76,7 +78,7 @@ Table of Contents
      4.1.  Custom Scheduler and Congestion Controller for
            Deadline-Aware Streams
      4.2.  Deadlines
-       4.2.1.  Signaling Deadlines
+       4.2.1.  Signalling Deadlines
        4.2.2.  Deadline Semantics
        4.2.3.  Handling Missed Deadline
      4.3.  Adaptive Forward Error Correction (FEC)
@@ -114,7 +116,7 @@ Table of Contents
    utilizing multiple paths simultaneously, but it currently lacks
    mechanisms to guarantee data delivery within specific timeframes.
    Given the increasing demand for real-time applications such as
-   teleoperation, live video streaming, and online gaming, there's a
+   teleoperation, live video streaming, and online gaming there's a
    growing need for transport protocols that can efficiently handle
    strict latency requirements.  Introducing deadline-aware streams to
    [MP-QUIC] could enable applications to meet those stringent latency
@@ -170,7 +172,7 @@ Table of Contents
 
 4.2.  Deadlines
 
-4.2.1.  Signaling Deadlines
+4.2.1.  Signalling Deadlines
 
    To signal deadlines, endpoints use the DEADLINE_CONTROL frame (see
    Section 5.2).  This frame associates a specific deadline with a
