@@ -241,7 +241,7 @@ Table of Contents
    endpoints SHOULD use clock synchronization while communication via
    DMTP to ensure accuracy of the delay measurements.  This proposal
    adds a new frame type (see Section 5.3) to determine the per path
-   delays.  Since acknowledgements should be sent back to the sender via
+   delays.  Since acknowledgments should be sent back to the sender via
    a path that is different from the receive path, per path delays have
    to be probed separately.  For this, PING frames are sent regularly
    via each individual active path.
