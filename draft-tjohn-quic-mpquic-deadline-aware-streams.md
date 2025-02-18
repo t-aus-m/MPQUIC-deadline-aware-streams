@@ -63,6 +63,8 @@ The Multipath Extension of QUIC {{MP-QUIC}} enhances performance by utilizing mu
 
 While the implementation of DMTP with implementation-specific APIs would be possible, that approach would likely lack endpoint coordination, because deadlines would not be communicated between different implementations and/or endpoints through the protocol. By introducing a transport parameter (see {{transport-parameter}}) and a custom frame (see {{deadline-control-frame}}), endpoints can negotiate support and exchange deadline information directly within the protocol, enabling coordinated scheduling decisions at the transport layer. Standardizing this mechanism avoids the limitations of implementation-specific solutions, promoting wider adoption and interoperability of DMTP across different implementations of {{MP-QUIC}}.
 
+This draft is based on a conference paper proposing {{DMTP}}.
+
 # Design of DMTP
 
 ## Custom Scheduler and Congestion Controller for Deadline-Aware Streams
@@ -178,7 +180,7 @@ When using deadline-awareness the receiver SHOULD acknowledge each packet separa
   }
 ~~~
 
-The DMTP_ACK adds the Timestamp field to the {{QUIC}} ACK frame. It MUST be formatted according to {{RFC3339}} with a resolution down to the nanosecond, i.e. with 9 digits after the decimal point. If an endpoint uses a clock with a lower resolution, the remaining digits SHOULD be padded with zeros.
+The DMTP_ACK frame adds the Timestamp field to the {{QUIC}} ACK frame. It MUST be formatted according to {{RFC3339}} with a resolution down to the nanosecond, i.e. with 9 digits after the decimal point. If an endpoint uses a clock with a lower resolution, the remaining digits SHOULD be padded with zeros.
 
 # API
 
