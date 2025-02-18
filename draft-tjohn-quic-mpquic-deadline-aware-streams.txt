@@ -73,48 +73,32 @@ Table of Contents
 
    1.  Introduction //: # TODO: Rephrase to reflect DMTP as a whole
    2.  Conventions and Definitions
-   3.  Motivation
-   4.  Design of DMTP
-     4.1.  Custom Scheduler and Congestion Controller for
+   3.  Design of DMTP
+     3.1.  Custom Scheduler and Congestion Controller for
            Deadline-Aware Streams
-     4.2.  Deadlines
-       4.2.1.  Signalling Deadlines
-       4.2.2.  Deadline Semantics
-       4.2.3.  Handling Missed Deadline
-     4.3.  Adaptive Forward Error Correction (FEC)
-     4.4.  Smart Retransmissions
-     4.5.  Path Metrics
-       4.5.1.  Per Path Delay
-       4.5.2.  Per Path Loss Rate
-   5.  Extension of Multipath Extension of QUIC
-     5.1.  Handshake Negotiation and Transport Parameter
-     5.2.  DEADLINE_CONTROL Frame
-     5.3.  DMTP_ACK Frame
-   6.  API
-   7.  Security Considerations
-   8.  IANA Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+     3.2.  Deadlines
+       3.2.1.  Signalling Deadlines
+       3.2.2.  Deadline Semantics
+       3.2.3.  Handling Missed Deadline
+     3.3.  Adaptive Forward Error Correction (FEC)
+     3.4.  Smart Retransmissions
+     3.5.  Path Metrics
+       3.5.1.  Per Path Delay
+       3.5.2.  Per Path Loss Rate
+   4.  Extension of Multipath Extension of QUIC
+     4.1.  Handshake Negotiation and Transport Parameter
+     4.2.  DEADLINE_CONTROL Frame
+     4.3.  DMTP_ACK Frame
+   5.  API
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
 1.  Introduction //: # TODO: Rephrase to reflect DMTP as a whole
-
-   Deadline-aware streams allow applications to specify deadlines for
-   data transmission on specific streams.  This enables the transport
-   layer to make scheduling and retransmission decisions that aim to
-   meet these deadlines, optimizing for latency-sensitive applications.
-
-2.  Conventions and Definitions
-
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
-
-3.  Motivation
 
    The Multipath Extension of QUIC [MP-QUIC] enhances performance by
    utilizing multiple paths simultaneously, but it currently lacks
@@ -130,8 +114,8 @@ Table of Contents
    would be possible, that approach would likely lack endpoint
    coordination, because deadlines would not be communicated between
    different implementations and/or endpoints through the protocol.  By
-   introducing a transport parameter (see Section 5.1) and a custom
-   frame (see Section 5.2), endpoints can negotiate support and exchange
+   introducing a transport parameter (see Section 4.1) and a custom
+   frame (see Section 4.2), endpoints can negotiate support and exchange
    deadline information directly within the protocol, enabling
    coordinated scheduling decisions at the transport layer.
    Standardizing this mechanism avoids the limitations of
@@ -141,9 +125,17 @@ Table of Contents
 
    This draft is based on a conference paper proposing [DMTP].
 
-4.  Design of DMTP
+2.  Conventions and Definitions
 
-4.1.  Custom Scheduler and Congestion Controller for Deadline-Aware
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Design of DMTP
+
+3.1.  Custom Scheduler and Congestion Controller for Deadline-Aware
       Streams
 
    Implementations that support deadline-aware streams SHOULD provide a
@@ -167,16 +159,16 @@ Table of Contents
    *  Deadline Miss Handling: Informing the application when a deadline
       cannot be met, allowing it to take appropriate action.
 
-4.2.  Deadlines
+3.2.  Deadlines
 
-4.2.1.  Signalling Deadlines
+3.2.1.  Signalling Deadlines
 
    To signal deadlines, endpoints use the DEADLINE_CONTROL frame (see
-   Section 5.2).  This frame associates a specific deadline with a
+   Section 4.2).  This frame associates a specific deadline with a
    stream, indicating the relative time by which the data should be
    delivered.
 
-4.2.2.  Deadline Semantics
+3.2.2.  Deadline Semantics
 
    *  Deadline Representation: Deadlines are represented as a relative
       time in milliseconds from the time the frame is sent.
@@ -193,7 +185,7 @@ Table of Contents
       schedulers and congestion controllers optimized for deadline-aware
       traffic, such as those based on DMTP concepts.
 
-4.2.3.  Handling Missed Deadline
+3.2.3.  Handling Missed Deadline
 
    If the transport layer determines that the deadline cannot be met, it
    MAY choose to:
@@ -207,7 +199,7 @@ Table of Contents
    The specific behavior is implementation-specific and MAY be
    configurable by the application.
 
-4.3.  Adaptive Forward Error Correction (FEC)
+3.3.  Adaptive Forward Error Correction (FEC)
 
    DMTP optionally uses Adaptive FEC as proposed in [QUIC-AFEC] to
    reduce the need for retransmissions in networks with random losses.
@@ -222,17 +214,17 @@ Table of Contents
    retransmission path.  The coding rate is chosen on a per-stream
    basis.
 
-4.4.  Smart Retransmissions
+3.4.  Smart Retransmissions
 
    //: # TODO: Describe the goal and design of smart retransmissions
    briefly
 
-4.5.  Path Metrics
+3.5.  Path Metrics
 
    //: # TODO: Describe, which path metrics are necessary for DMTP to
    work and how they will be gathered
 
-4.5.1.  Per Path Delay
+3.5.1.  Per Path Delay
 
    A crucial metric for DMTP to work is the one way delay of each path,
    as this determines the suitability of that path for reaching the
@@ -242,22 +234,22 @@ Table of Contents
    measure the per path delay itself.  For this to work effectively,
    endpoints SHOULD use clock synchronization while communication via
    DMTP to ensure accuracy of the delay measurements.  This proposal
-   adds a new frame type (see Section 5.3) to determine the per path
+   adds a new frame type (see Section 4.3) to determine the per path
    delays.  Since acknowledgments should be sent back to the sender via
    a path that is different from the receive path, per path delays have
    to be probed separately.  For this, PING frames are sent regularly
    via each individual active path.
 
-4.5.2.  Per Path Loss Rate
+3.5.2.  Per Path Loss Rate
 
    //: # TODO: Describe how loss rate is determined
 
-5.  Extension of Multipath Extension of QUIC
+4.  Extension of Multipath Extension of QUIC
 
    This extension is based on and aims to extend [MP-QUIC].  The
    contents of this extension will be specified in this section.
 
-5.1.  Handshake Negotiation and Transport Parameter
+4.1.  Handshake Negotiation and Transport Parameter
 
    This extension defines a new transport parameter, used to negotiate
    the use of deadline-aware streams during the connection handshake, as
@@ -275,7 +267,7 @@ Table of Contents
    DEADLINE_CONTROL frame without having negotiated support, it MUST
    treat this as a connection error of type PROTOCOL_VIOLATION
 
-5.2.  DEADLINE_CONTROL Frame
+4.2.  DEADLINE_CONTROL Frame
 
    The DEADLINE_CONTROL frame (type=TBD) is used to signal deadline-
    awareness for specific streams and to indicate their associated
@@ -312,7 +304,7 @@ Table of Contents
 
    *  The DEADLINE_CONTROL frame MUST only be sent in 1-RTT packets.
 
-5.3.  DMTP_ACK Frame
+4.3.  DMTP_ACK Frame
 
    The DMTP_ACK frame (type=TBD) is used to acknowledge the reception of
    a packet and feedback the reception time to the sender.  If the
@@ -342,17 +334,17 @@ Table of Contents
    endpoint uses a clock with a lower resolution, the remaining digits
    SHOULD be padded with zeros.
 
-6.  API
+5.  API
 
    //: # TODO: Define API
 
-7.  Security Considerations
+6.  Security Considerations
 
    This extension retains all the security features and considerations
    of [QUIC], [QUIC-TLS] and [MP-QUIC]. //: # TODO: Add DMTP specific
    Security Considerations
 
-8.  IANA Considerations
+7.  IANA Considerations
 
    This document defines a new transport parameter for the negotiation
    of enable multiple paths for QUIC, and three new frame types.  The
@@ -365,7 +357,7 @@ Table of Contents
          +=======+===============================+===============+
          | Value | Parameter Name.               | Specification |
          +=======+===============================+===============+
-         | TBD   | enable_deadline_aware_streams | Section 5.1   |
+         | TBD   | enable_deadline_aware_streams | Section 4.1   |
          +-------+-------------------------------+---------------+
 
            Table 1: Addition to QUIC Transport Parameters Entries
@@ -376,17 +368,17 @@ Table of Contents
                +=======+==================+===============+
                | Value | Frame Name       | Specification |
                +=======+==================+===============+
-               | TBD   | DEADLINE_CONTROL | Section 5.2   |
+               | TBD   | DEADLINE_CONTROL | Section 4.2   |
                +-------+------------------+---------------+
-               | TBD   | DMTP_ACK         | Section 5.3   |
+               | TBD   | DMTP_ACK         | Section 4.3   |
                +-------+------------------+---------------+
 
                   Table 2: Addition to QUIC Frame Types
                                  Entries
 
-9.  References
+8.  References
 
-9.1.  Normative References
+8.1.  Normative References
 
    [MP-QUIC]  Liu, Y., Ma, Y., De Coninck, Q., Bonaventure, O., Huitema,
               C., and M. Kühlewind, "Multipath Extension for QUIC", Work
@@ -424,7 +416,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-9.2.  Informative References
+8.2.  Informative References
 
    [DMTP]     John, T., Perrig, A., and D. Hausheer, "DMTP: Deadline-
               aware Multipath Transport Protocol", IEEE, 2023 IFIP
