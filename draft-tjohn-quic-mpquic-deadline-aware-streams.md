@@ -56,13 +56,11 @@ Deadline-aware streams allow applications to specify deadlines for data transmis
 
 {::boilerplate bcp14-tagged}
 
-# Motivation //: # TODO: Rephrase to reflect DMTP as a whole
+# Motivation
 
-The Multipath Extension of QUIC {{MP-QUIC}} enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing deadline-aware streams to {{MP-QUIC}} could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.
+The Multipath Extension of QUIC {{MP-QUIC}} enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing DMTP to {{MP-QUIC}} could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.
 
-Additionally, the ability to have multiple paths using the same 4-tuple opens up the possibility of leveraging paths from path-aware networks like SCION, source routing, and others. This expands the pool of available paths beyond traditional IPv4 and IPv6 routes, potentially increasing the effectiveness of deadline-aware mechanisms like those proposed in the Deadline-aware Multipath Transport Protocol {{DMTP}}.
-
-While the implementation of deadline-aware streams with implementation-specific APIs is of course possible, that approach would likely lack endpoint coordination, because deadlines would not be communicated between different through the protocol. By introducing a transport parameter (see {{transport-parameter}}) and a custom frame (see {{deadline-control-frame}}), endpoints can negotiate support and exchange deadline information directly within the protocol, enabling coordinated scheduling decisions at the transport layer. Standardizing this mechanism avoids the limitations of implementation-specific solutions, promoting wider adoption and interoperability of deadline-aware streams across different implementations of {{MP-QUIC}}.
+While the implementation of DMTP with implementation-specific APIs would be possible, that approach would likely lack endpoint coordination, because deadlines would not be communicated between different implementations and/or endpoints through the protocol. By introducing a transport parameter (see {{transport-parameter}}) and a custom frame (see {{deadline-control-frame}}), endpoints can negotiate support and exchange deadline information directly within the protocol, enabling coordinated scheduling decisions at the transport layer. Standardizing this mechanism avoids the limitations of implementation-specific solutions, promoting wider adoption and interoperability of DMTP across different implementations of {{MP-QUIC}}.
 
 # Design of DMTP
 
