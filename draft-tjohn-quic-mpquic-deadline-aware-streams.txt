@@ -87,6 +87,7 @@ Table of Contents
    5.  Extension of Multipath Extension of QUIC
      5.1.  Handshake Negotiation and Transport Parameter
      5.2.  DEADLINE_CONTROL Frame
+       5.2.1.  DMTP_ACK Frame
    6.  API
    7.  Security Considerations
    8.  IANA Considerations
@@ -208,13 +209,26 @@ Table of Contents
    reduce the need for retransmissions in networks with random losses.
    When using [QUIC-AFEC], the Tag Type of the FEC_Tag MUST be set to 1
    in order for the FEC to work in a [MP-QUIC] and DMTP environment.
-   FEC Packets SHOULD be sent via another path then the source data, it
-   is however RECOMMENDED to send the FEC data via the retransmission
-   path.
+   This indicates Long Flow Usage which in turn implies that both source
+   symbol packets and repair symbol packets MUST contain the FEC_Tag
+   frame, which is necessary for matching repair symbol packets to their
+   respective source symbol packets after sending them via different
+   paths.  FEC Packets SHOULD be sent via another path then the source
+   data, it is however RECOMMENDED to send the FEC data via the
+   retransmission path.  The coding rate is chosen on a per-stream
+   basis.
 
 4.4.  Smart Retransmissions
 
+   //: # TODO: Describe the goal and design of smart retransmissions
+   briefly
+
 4.5.  Path Metrics
+
+   //: # TODO: Describe, which path metrics are necessary for DMTP to
+   work and how they will be
+
+   ###
 
 5.  Extension of Multipath Extension of QUIC
 
@@ -225,8 +239,8 @@ Table of Contents
 
    This extension defines a new transport parameter, used to negotiate
    the use of deadline-aware streams during the connection handshake, as
-   specified in [QUIC-TRANSPORT].  The new transport parameter is
-   defined as follows:
+   specified in [QUIC].  The new transport parameter is defined as
+   follows:
 
    *  enable_deadline_aware_streams (value TBD): A zero-length value
       that, if present, indicates that the endpoint supports deadline-
@@ -276,12 +290,45 @@ Table of Contents
 
    *  The DEADLINE_CONTROL frame MUST only be sent in 1-RTT packets.
 
+5.2.1.  DMTP_ACK Frame
+
+   The DMTP_ACK frame (type=TBD) is used to acknowledge the reception of
+   a packet and feedback the reception time to the sender.  If the
+   received frame contains a PING (type=0x01) frame, the DMTP_ACK frame
+   MUST be sent back on the same path that it was received at.  The
+   DMTP_ACK Frame contains the same information as a [QUIC] ACK frame,
+   but adds a timestamp to it, in order to communicate if a packet has
+   met its deadline or not.
+
+   When using deadline-awareness the receiver SHOULD acknowledge each
+   packet separately.
+
+     DMTP_ACK Frame {
+      Type (i) = TBD,
+      Largest Acknowledged (i),
+      ACK Delay (i),
+      ACK Range Count (i),
+      First ACK Range (i),
+      ACK Range (..) ...,
+      [ECN Counts (..)],
+      Timestamp (i),
+     }
+
+   The DMTP_ACK adds the Timestamp field to the [QUIC] ACK frame.  It
+   MUST be formatted according to [rfc3339] with a resolution down to
+   the nanosecond, i.e. with 9 digits after the decimal point.  If an
+   endpoint uses a clock with a lower resolution, the remaining digits
+   SHOULD be padded with zeros.
+
 6.  API
+
+   //: # TODO: Define API
 
 7.  Security Considerations
 
    This extension retains all the security features and considerations
-   of [QUIC-TRANSPORT], [QUIC-TLS] and [MP-QUIC].
+   of [QUIC], [QUIC-TLS] and [MP-QUIC]. //: # TODO: Add DMTP specific
+   Security Considerations
 
 8.  IANA Considerations
 
@@ -309,6 +356,8 @@ Table of Contents
                +=======+==================+===============+
                | TBD   | DEADLINE_CONTROL | Section 5.2   |
                +-------+------------------+---------------+
+               | TBD   | DMTP_ACK         | Section 5.2.1 |
+               +-------+------------------+---------------+
 
                   Table 2: Addition to QUIC Frame Types
                                  Entries
@@ -323,6 +372,11 @@ Table of Contents
               22 January 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-quic-multipath-12>.
 
+   [QUIC]     Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
+              Multiplexed and Secure Transport", RFC 9000,
+              DOI 10.17487/RFC9000, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9000>.
+
    [QUIC-AFEC]
               Moskvitin, D., Onegin, E., Huang, R., Luo, H., and Q.
               Chen, "Adaptive Forward Erasure Correction for Delay-
@@ -335,16 +389,14 @@ Table of Contents
               QUIC", RFC 9001, DOI 10.17487/RFC9001, May 2021,
               <https://www.rfc-editor.org/rfc/rfc9001>.
 
-   [QUIC-TRANSPORT]
-              Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
-              Multiplexed and Secure Transport", RFC 9000,
-              DOI 10.17487/RFC9000, May 2021,
-              <https://www.rfc-editor.org/rfc/rfc9000>.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [rfc3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
+              Timestamps", RFC 3339, DOI 10.17487/RFC3339, July 2002,
+              <https://www.rfc-editor.org/rfc/rfc3339>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
