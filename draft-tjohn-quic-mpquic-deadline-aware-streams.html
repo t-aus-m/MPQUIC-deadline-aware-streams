@@ -1270,6 +1270,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       </h2>
 <p id="section-3-1">The Multipath Extension of QUIC <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span> enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing DMTP to <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span> could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">While the implementation of DMTP with implementation-specific APIs would be possible, that approach would likely lack endpoint coordination, because deadlines would not be communicated between different implementations and/or endpoints through the protocol. By introducing a transport parameter (see <a href="#transport-parameter" class="auto internal xref">Section 5.1</a>) and a custom frame (see <a href="#deadline-control-frame" class="auto internal xref">Section 5.2</a>), endpoints can negotiate support and exchange deadline information directly within the protocol, enabling coordinated scheduling decisions at the transport layer. Standardizing this mechanism avoids the limitations of implementation-specific solutions, promoting wider adoption and interoperability of DMTP across different implementations of <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">This draft is based on a conference paper proposing <span>[<a href="#DMTP" class="cite xref">DMTP</a>]</span>.<a href="#section-3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="design-of-dmtp">
@@ -1486,7 +1487,7 @@ An endpoint sends a DEADLINE_CONTROL frame to indicate that data on the specifie
   }
 </pre><a href="#section-5.3-3" class="pilcrow">¶</a>
 </div>
-<p id="section-5.3-4">The DMTP_ACK adds the Timestamp field to the <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span> ACK frame. It <span class="bcp14">MUST</span> be formatted according to <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> with a resolution down to the nanosecond, i.e. with 9 digits after the decimal point. If an endpoint uses a clock with a lower resolution, the remaining digits <span class="bcp14">SHOULD</span> be padded with zeros.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">The DMTP_ACK frame adds the Timestamp field to the <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span> ACK frame. It <span class="bcp14">MUST</span> be formatted according to <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span> with a resolution down to the nanosecond, i.e. with 9 digits after the decimal point. If an endpoint uses a clock with a lower resolution, the remaining digits <span class="bcp14">SHOULD</span> be padded with zeros.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

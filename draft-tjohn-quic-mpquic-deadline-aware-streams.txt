@@ -139,6 +139,8 @@ Table of Contents
    interoperability of DMTP across different implementations of
    [MP-QUIC].
 
+   This draft is based on a conference paper proposing [DMTP].
+
 4.  Design of DMTP
 
 4.1.  Custom Scheduler and Congestion Controller for Deadline-Aware
@@ -334,8 +336,8 @@ Table of Contents
       Timestamp (i),
      }
 
-   The DMTP_ACK adds the Timestamp field to the [QUIC] ACK frame.  It
-   MUST be formatted according to [RFC3339] with a resolution down to
+   The DMTP_ACK frame adds the Timestamp field to the [QUIC] ACK frame.
+   It MUST be formatted according to [RFC3339] with a resolution down to
    the nanosecond, i.e. with 9 digits after the decimal point.  If an
    endpoint uses a clock with a lower resolution, the remaining digits
    SHOULD be padded with zeros.
