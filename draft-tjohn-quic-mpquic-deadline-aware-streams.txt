@@ -87,7 +87,7 @@ Table of Contents
    5.  Extension of Multipath Extension of QUIC
      5.1.  Handshake Negotiation and Transport Parameter
      5.2.  DEADLINE_CONTROL Frame
-       5.2.1.  DMTP_ACK Frame
+     5.3.  DMTP_ACK Frame
    6.  API
    7.  Security Considerations
    8.  IANA Considerations
@@ -290,7 +290,7 @@ Table of Contents
 
    *  The DEADLINE_CONTROL frame MUST only be sent in 1-RTT packets.
 
-5.2.1.  DMTP_ACK Frame
+5.3.  DMTP_ACK Frame
 
    The DMTP_ACK frame (type=TBD) is used to acknowledge the reception of
    a packet and feedback the reception time to the sender.  If the
@@ -356,7 +356,7 @@ Table of Contents
                +=======+==================+===============+
                | TBD   | DEADLINE_CONTROL | Section 5.2   |
                +-------+------------------+---------------+
-               | TBD   | DMTP_ACK         | Section 5.2.1 |
+               | TBD   | DMTP_ACK         | Section 5.3   |
                +-------+------------------+---------------+
 
                   Table 2: Addition to QUIC Frame Types

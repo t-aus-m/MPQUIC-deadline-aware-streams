@@ -1200,11 +1200,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-deadline_control-frame" class="internal xref">DEADLINE_CONTROL Frame</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.1">
-                    <p id="section-toc.1-1.5.2.2.2.1.1"><a href="#section-5.2.1" class="auto internal xref">5.2.1</a>.  <a href="#name-dmtp_ack-frame" class="internal xref">DMTP_ACK Frame</a></p>
 </li>
-                </ul>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-dmtp_ack-frame" class="internal xref">DMTP_ACK Frame</a></p>
 </li>
             </ul>
 </li>
@@ -1442,14 +1440,16 @@ An endpoint sends a DEADLINE_CONTROL frame to indicate that data on the specifie
             <p id="section-5.2-6.3.1">The DEADLINE_CONTROL frame <span class="bcp14">MUST</span> only be sent in 1-RTT packets.<a href="#section-5.2-6.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
+</section>
+</div>
 <div id="dmtp-ack-frame">
-<section id="section-5.2.1">
-          <h4 id="name-dmtp_ack-frame">
-<a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-dmtp_ack-frame" class="section-name selfRef">DMTP_ACK Frame</a>
-          </h4>
-<p id="section-5.2.1-1">The DMTP_ACK frame (type=TBD) is used to acknowledge the reception of a packet and feedback the reception time to the sender. If the received frame contains a PING (type=0x01) frame, the DMTP_ACK frame <span class="bcp14">MUST</span> be sent back on the same path that it was received at. The DMTP_ACK Frame contains the same information as a <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span> ACK frame, but adds a timestamp to it, in order to communicate if a packet has met its deadline or not.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.1-2">When using deadline-awareness the receiver <span class="bcp14">SHOULD</span> acknowledge each packet separately.<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-5.2.1-3">
+<section id="section-5.3">
+        <h3 id="name-dmtp_ack-frame">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-dmtp_ack-frame" class="section-name selfRef">DMTP_ACK Frame</a>
+        </h3>
+<p id="section-5.3-1">The DMTP_ACK frame (type=TBD) is used to acknowledge the reception of a packet and feedback the reception time to the sender. If the received frame contains a PING (type=0x01) frame, the DMTP_ACK frame <span class="bcp14">MUST</span> be sent back on the same path that it was received at. The DMTP_ACK Frame contains the same information as a <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span> ACK frame, but adds a timestamp to it, in order to communicate if a packet has met its deadline or not.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">When using deadline-awareness the receiver <span class="bcp14">SHOULD</span> acknowledge each packet separately.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.3-3">
 <pre>
   DMTP_ACK Frame {
    Type (i) = TBD,
@@ -1461,11 +1461,9 @@ An endpoint sends a DEADLINE_CONTROL frame to indicate that data on the specifie
    [ECN Counts (..)],
    Timestamp (i),
   }
-</pre><a href="#section-5.2.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-5.3-3" class="pilcrow">¶</a>
 </div>
-<p id="section-5.2.1-4">The DMTP_ACK adds the Timestamp field to the <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span> ACK frame. It <span class="bcp14">MUST</span> be formatted according to <span>[<a href="#rfc3339" class="cite xref">rfc3339</a>]</span> with a resolution down to the nanosecond, i.e. with 9 digits after the decimal point. If an endpoint uses a clock with a lower resolution, the remaining digits <span class="bcp14">SHOULD</span> be padded with zeros.<a href="#section-5.2.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
+<p id="section-5.3-4">The DMTP_ACK adds the Timestamp field to the <span>[<a href="#QUIC" class="cite xref">QUIC</a>]</span> ACK frame. It <span class="bcp14">MUST</span> be formatted according to <span>[<a href="#rfc3339" class="cite xref">rfc3339</a>]</span> with a resolution down to the nanosecond, i.e. with 9 digits after the decimal point. If an endpoint uses a clock with a lower resolution, the remaining digits <span class="bcp14">SHOULD</span> be padded with zeros.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1545,7 +1543,7 @@ the "QUIC Frame Types" registry under the "QUIC Protocol" heading.<a href="#sect
             <td class="text-left" rowspan="1" colspan="1">TBD</td>
             <td class="text-left" rowspan="1" colspan="1">DMTP_ACK</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <a href="#dmtp-ack-frame" class="auto internal xref">Section 5.2.1</a>
+              <a href="#dmtp-ack-frame" class="auto internal xref">Section 5.3</a>
 </td>
           </tr>
         </tbody>
