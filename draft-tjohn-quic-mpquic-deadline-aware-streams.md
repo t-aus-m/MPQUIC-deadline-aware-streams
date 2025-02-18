@@ -44,8 +44,7 @@ informative:
 
 --- abstract
 
-//: # TODO: Rephrase to reflect DMTP as a whole
-This document proposes deadline aware streams to be added to the Multipath Extension to QUIC in order to be able to deliver deadline sensitive information via QUIC over multiple paths.
+This document proposes the Deadline-aware Multipath Transport Protocol (DMTP) as an extension to the Multipath Extension of QUIC. DMTP leverages multiple paths along adaptive Forward Error Correction (FEC) and smart retransmissions to support real-time applications with strict latency requirements. With this it fills in a niche with increasing demand, that existing multipath protocols fall short on.
 
 --- middle
 
@@ -59,7 +58,7 @@ Deadline-aware streams allow applications to specify deadlines for data transmis
 
 # Motivation //: # TODO: Rephrase to reflect DMTP as a whole
 
-The Multipath Extension of QUIC {{MP-QUIC}} enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming, there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing deadline-aware streams to {{MP-QUIC}} could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.
+The Multipath Extension of QUIC {{MP-QUIC}} enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing deadline-aware streams to {{MP-QUIC}} could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.
 
 Additionally, the ability to have multiple paths using the same 4-tuple opens up the possibility of leveraging paths from path-aware networks like SCION, source routing, and others. This expands the pool of available paths beyond traditional IPv4 and IPv6 routes, potentially increasing the effectiveness of deadline-aware mechanisms like those proposed in the Deadline-aware Multipath Transport Protocol {{DMTP}}.
 
@@ -79,7 +78,7 @@ Implementations that support deadline-aware streams SHOULD provide a custom sche
 
 ## Deadlines
 
-### Signaling Deadlines
+### Signalling Deadlines
 
 To signal deadlines, endpoints use the DEADLINE_CONTROL frame (see {{deadline-control-frame}}). This frame associates a specific deadline with a stream, indicating the relative time by which the data should be delivered.
 
