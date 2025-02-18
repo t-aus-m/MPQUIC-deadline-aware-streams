@@ -33,7 +33,7 @@ author: # TODO: Any more authors that need to be added?
     email: "riechard@ovgu.de"
 
 normative:
-   QUIC-TRANSPORT: rfc9000
+   QUIC: rfc9000
    QUIC-TLS: rfc9001
    MP-QUIC: I-D.draft-ietf-quic-multipath
    QUIC-AFEC: I-D.draft-dmoskvitin-quic-adaptive-fec
@@ -120,7 +120,7 @@ This extension is based on and aims to extend {{MP-QUIC}}. The contents of this 
 
 ## Handshake Negotiation and Transport Parameter {#transport-parameter}
 
-This extension defines a new transport parameter, used to negotiate the use of deadline-aware streams during the connection handshake, as specified in {{QUIC-TRANSPORT}}. The new transport parameter is defined as follows:
+This extension defines a new transport parameter, used to negotiate the use of deadline-aware streams during the connection handshake, as specified in {{QUIC}}. The new transport parameter is defined as follows:
 
 - enable_deadline_aware_streams (value TBD): A zero-length value that, if present, indicates that the endpoint supports deadline-aware streams.
 
@@ -180,7 +180,7 @@ The DMTP_ACK adds the Timestamp field to the {{QUIC}} ACK frame. It MUST be form
 
 # Security Considerations
 
-This extension retains all the security features and considerations of {{QUIC-TRANSPORT}}, {{QUIC-TLS}} and {{MP-QUIC}}.
+This extension retains all the security features and considerations of {{QUIC}}, {{QUIC-TLS}} and {{MP-QUIC}}.
 //: # TODO: Add DMTP specific Security Considerations
 
 # IANA Considerations
