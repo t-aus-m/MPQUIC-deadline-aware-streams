@@ -1159,7 +1159,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-motivation-todo-rephrase-to" class="internal xref">Motivation //: # TODO: Rephrase to reflect DMTP as a whole</a></p>
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-motivation" class="internal xref">Motivation</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-design-of-dmtp" class="internal xref">Design of DMTP</a></p>
@@ -1186,6 +1186,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
                 <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-smart-retransmissions" class="internal xref">Smart Retransmissions</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5">
+                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-path-metrics" class="internal xref">Path Metrics</a></p>
 </li>
             </ul>
 </li>
@@ -1249,14 +1252,13 @@ described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</s
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="motivation-todo-rephrase-to-reflect-dmtp-as-a-whole">
+<div id="motivation">
 <section id="section-3">
-      <h2 id="name-motivation-todo-rephrase-to">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-motivation-todo-rephrase-to" class="section-name selfRef">Motivation //: # TODO: Rephrase to reflect DMTP as a whole</a>
+      <h2 id="name-motivation">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-motivation" class="section-name selfRef">Motivation</a>
       </h2>
-<p id="section-3-1">The Multipath Extension of QUIC <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span> enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing deadline-aware streams to <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span> could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">Additionally, the ability to have multiple paths using the same 4-tuple opens up the possibility of leveraging paths from path-aware networks like SCION, source routing, and others. This expands the pool of available paths beyond traditional IPv4 and IPv6 routes, potentially increasing the effectiveness of deadline-aware mechanisms like those proposed in the Deadline-aware Multipath Transport Protocol <span>[<a href="#DMTP" class="cite xref">DMTP</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">While the implementation of deadline-aware streams with implementation-specific APIs is of course possible, that approach would likely lack endpoint coordination, because deadlines would not be communicated between different through the protocol. By introducing a transport parameter (see <a href="#transport-parameter" class="auto internal xref">Section 5.1</a>) and a custom frame (see <a href="#deadline-control-frame" class="auto internal xref">Section 5.2</a>), endpoints can negotiate support and exchange deadline information directly within the protocol, enabling coordinated scheduling decisions at the transport layer. Standardizing this mechanism avoids the limitations of implementation-specific solutions, promoting wider adoption and interoperability of deadline-aware streams across different implementations of <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span>.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-1">The Multipath Extension of QUIC <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span> enhances performance by utilizing multiple paths simultaneously, but it currently lacks mechanisms to guarantee data delivery within specific timeframes. Given the increasing demand for real-time applications such as teleoperation, live video streaming, and online gaming there's a growing need for transport protocols that can efficiently handle strict latency requirements. Introducing DMTP to <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span> could enable applications to meet those stringent latency constraints, optimizing for low-latency and high-reliability scenarios.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">While the implementation of DMTP with implementation-specific APIs would be possible, that approach would likely lack endpoint coordination, because deadlines would not be communicated between different implementations and/or endpoints through the protocol. By introducing a transport parameter (see <a href="#transport-parameter" class="auto internal xref">Section 5.1</a>) and a custom frame (see <a href="#deadline-control-frame" class="auto internal xref">Section 5.2</a>), endpoints can negotiate support and exchange deadline information directly within the protocol, enabling coordinated scheduling decisions at the transport layer. Standardizing this mechanism avoids the limitations of implementation-specific solutions, promoting wider adoption and interoperability of DMTP across different implementations of <span>[<a href="#MP-QUIC" class="cite xref">MP-QUIC</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="design-of-dmtp">
@@ -1358,6 +1360,13 @@ When using <span>[<a href="#QUIC-AFEC" class="cite xref">QUIC-AFEC</a>]</span>, 
 <section id="section-4.4">
         <h3 id="name-smart-retransmissions">
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-smart-retransmissions" class="section-name selfRef">Smart Retransmissions</a>
+      </h3>
+</section>
+</div>
+<div id="path-metrics">
+<section id="section-4.5">
+        <h3 id="name-path-metrics">
+<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-path-metrics" class="section-name selfRef">Path Metrics</a>
       </h3>
 </section>
 </div>
