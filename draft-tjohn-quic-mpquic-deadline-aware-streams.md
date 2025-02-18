@@ -37,6 +37,7 @@ normative:
    QUIC-TLS: rfc9001
    MP-QUIC: I-D.draft-ietf-quic-multipath
    QUIC-AFEC: I-D.draft-dmoskvitin-quic-adaptive-fec
+   rfc3339:
 
 informative:
    DMTP: DOI.10.23919/IFIPNetworking57963.2023.10186417
@@ -100,11 +101,18 @@ The specific behavior is implementation-specific and MAY be configurable by the 
 ## Adaptive Forward Error Correction (FEC)
 
 DMTP optionally uses Adaptive FEC as proposed in {{QUIC-AFEC}} to reduce the need for retransmissions in networks with random losses.
-When using {{QUIC-AFEC}}, the Tag Type of the FEC_Tag MUST be set to 1 in order for the FEC to work in a {{MP-QUIC}} and DMTP environment. FEC Packets SHOULD be sent via another path then the source data, it is however RECOMMENDED to send the FEC data via the retransmission path.
+When using {{QUIC-AFEC}}, the Tag Type of the FEC_Tag MUST be set to 1 in order for the FEC to work in a {{MP-QUIC}} and DMTP environment. This indicates Long Flow Usage which in turn implies that both source symbol packets and repair symbol packets MUST contain the FEC_Tag frame, which is necessary for matching repair symbol packets to their respective source symbol packets after sending them via different paths.
+FEC Packets SHOULD be sent via another path then the source data, it is however RECOMMENDED to send the FEC data via the retransmission path. The coding rate is chosen on a per-stream basis.
 
 ## Smart Retransmissions
 
+//: # TODO: Describe the goal and design of smart retransmissions briefly
+
 ## Path Metrics
+
+//: # TODO: Describe, which path metrics are necessary for DMTP to work and how they will be
+
+###
 
 # Extension of Multipath Extension of QUIC
 
@@ -145,11 +153,35 @@ Usage Constraints:
 - If an endpoint receives a DEADLINE_CONTROL frame without having negotiated support, it MUST treat it as a connection error of type PROTOCOL_VIOLATION.
 - The DEADLINE_CONTROL frame MUST only be sent in 1-RTT packets.
 
+### DMTP_ACK Frame {#dmtp-ack-frame}
+
+The DMTP_ACK frame (type=TBD) is used to acknowledge the reception of a packet and feedback the reception time to the sender. If the received frame contains a PING (type=0x01) frame, the DMTP_ACK frame MUST be sent back on the same path that it was received at. The DMTP_ACK Frame contains the same information as a {{QUIC}} ACK frame, but adds a timestamp to it, in order to communicate if a packet has met its deadline or not.
+
+When using deadline-awareness the receiver SHOULD acknowledge each packet separately.
+
+~~~
+  DMTP_ACK Frame {
+   Type (i) = TBD,
+   Largest Acknowledged (i),
+   ACK Delay (i),
+   ACK Range Count (i),
+   First ACK Range (i),
+   ACK Range (..) ...,
+   [ECN Counts (..)],
+   Timestamp (i),
+  }
+~~~
+
+The DMTP_ACK adds the Timestamp field to the {{QUIC}} ACK frame. It MUST be formatted according to {{rfc3339}} with a resolution down to the nanosecond, i.e. with 9 digits after the decimal point. If an endpoint uses a clock with a lower resolution, the remaining digits SHOULD be padded with zeros.
+
 # API
+
+//: # TODO: Define API
 
 # Security Considerations
 
 This extension retains all the security features and considerations of {{QUIC-TRANSPORT}}, {{QUIC-TLS}} and {{MP-QUIC}}.
+//: # TODO: Add DMTP specific Security Considerations
 
 # IANA Considerations
 
@@ -167,7 +199,8 @@ the "QUIC Frame Types" registry under the "QUIC Protocol" heading.
 
 Value                                              | Frame Name          | Specification
 ---------------------------------------------------|---------------------|-----------------
-TBD                                                  | DEADLINE_CONTROL | {{deadline-control-frame}}
+TBD                                                | DEADLINE_CONTROL    | {{deadline-control-frame}}
+TBD                                                | DMTP_ACK            | {{dmtp-ack-frame}}
 {: #frame-types title="Addition to QUIC Frame Types Entries"}
 
 --- back
