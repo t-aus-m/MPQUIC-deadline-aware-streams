@@ -153,7 +153,7 @@ Usage Constraints:
 - If an endpoint receives a DEADLINE_CONTROL frame without having negotiated support, it MUST treat it as a connection error of type PROTOCOL_VIOLATION.
 - The DEADLINE_CONTROL frame MUST only be sent in 1-RTT packets.
 
-### DMTP_ACK Frame {#dmtp-ack-frame}
+## DMTP_ACK Frame {#dmtp-ack-frame}
 
 The DMTP_ACK frame (type=TBD) is used to acknowledge the reception of a packet and feedback the reception time to the sender. If the received frame contains a PING (type=0x01) frame, the DMTP_ACK frame MUST be sent back on the same path that it was received at. The DMTP_ACK Frame contains the same information as a {{QUIC}} ACK frame, but adds a timestamp to it, in order to communicate if a packet has met its deadline or not.
 
