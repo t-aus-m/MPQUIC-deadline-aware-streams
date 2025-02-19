@@ -290,4 +290,4 @@ TBD (2)                                            | DMTP_ACK            | {{dmt
 # Acknowledgments
 {:numbered="false"}
 
-The authors thank the QUIC working group and the designers of both MP-QUIC and {{QUIC-DTP}} for paving the way for deadline-aware features in QUIC. The concept of scheduling data with deadlines over multiple paths builds on numerous discussions around partial reliability, adaptive FEC, and optimal path selection.
+The authors thank the QUIC working group and the designers of both {{MP-QUIC}} and {{QUIC-DTP}} for paving the way for deadline-aware features in QUIC. The concept of scheduling data with deadlines over multiple paths builds on numerous discussions around partial reliability, adaptive FEC, and optimal path selection.
